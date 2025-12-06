@@ -2,12 +2,13 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [ "main", "principal", "master" ]
+    branches: ["main", "principal", "master"]
   pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout automação
@@ -24,27 +25,12 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Checkout app repo (front + back)
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ vars.APP_REPO }}
-          path: app
+      
+      - name: Start stack (docker compose)
+        run: docker compose -f docker-compose.ci.yml up -d --build
 
-      - name: Start backend
-        working-directory: app/${{ vars.BACKEND_DIR }}
-        run: |
-          npm ci
-          npm run dev &
-      
-      - name: Start frontend
-        working-directory: app/${{ vars.FRONTEND_DIR }}
-        run: |
-          npm ci
-          npm run dev &
-      
       - name: Wait services
-        run: |
-          npx wait-on http://localhost:3030 http://localhost:3000
+        run: npx wait-on http://localhost:3030 http://localhost:3000
 
       - name: Run Playwright tests
         env:
@@ -58,3 +44,22 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report
+
+     
+      - name: Upload docker logs
+        if: always()
+        run: |
+          docker compose -f docker-compose.ci.yml ps
+          docker compose -f docker-compose.ci.yml logs --no-color > docker-logs.txt
+
+      - name: Upload docker logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-logs
+          path: docker-logs.txt
+
+    
+      - name: Shutdown stack
+        if: always()
+        run: docker compose -f docker-compose.ci.yml down -v
