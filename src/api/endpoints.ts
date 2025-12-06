@@ -8,4 +8,12 @@ export const endpoints = {
     listar: "/listarMesas",
     atualizar: (id: number | string) => `/atualizarMesa/${id}`,
   },
+  reservas: {
+    criar: "/criarReserva",
+    listar: "/listarReservas",
+    deletar: (id: number | string) => `/deletarReserva/${id}`,
+    atualizar: (id: number | string) => `/atualizarReserva/${id}`,
+    verificarProximas: "/verificarReservas",
+    confirmar: (id: number | string) => `/ConfirmarReserva/${id}`,
+  },
 } as const;

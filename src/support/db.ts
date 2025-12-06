@@ -9,3 +9,12 @@ export async function cleanupMesaByNumero(numeroMesa: number) {
     await db.end();
   }
 }
+
+export async function deleteBy(table: string, column: string, value: string | number) {
+  const db = await createDbClient();
+  try {
+    await db.query(`DELETE FROM "${table}" WHERE "${column}" = $1`, [value]);
+  } finally {
+    await db.end();
+  }
+}
