@@ -1,6 +1,6 @@
 export const endpoints = {
   auth: {
     registro: "/auth/registro",
-    // login: "/auth/login", // 
+    login: "/auth/login",
   },
 } as const;
