@@ -8,3 +8,15 @@ export function registerUser(
 ): Promise<APIResponse> {
   return api.post(endpoints.auth.registro, { data: payload });
 }
+
+
+export type LoginPayload = {
+  email: string;
+  senha: string;
+};
+export function loginUser(
+  api: APIRequestContext,
+  payload: LoginPayload
+): Promise<APIResponse> {
+  return api.post(endpoints.auth.login, { data: payload });
+}
