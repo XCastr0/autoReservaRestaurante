@@ -1,0 +1,26 @@
+{
+  "name": "autoreservarestaurante",
+  "version": "1.0.0",
+  "description": "Projeto de portfólio focado em **automação de testes** para uma aplicação de **Sistema de Reservas**, validando:\r - ✅ **Front-end (E2E)**: fluxos reais do usuário (login, navegação, criação/consulta de reservas)\r - ✅ **Back-end (API)**: validação de endpoints (auth, usuários, mesas, reservas)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XCastr0/autoReservaRestaurante.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XCastr0/autoReservaRestaurante/issues"
+  },
+  "homepage": "https://github.com/XCastr0/autoReservaRestaurante#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "dotenv": "^17.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

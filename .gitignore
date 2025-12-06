@@ -1,0 +1,15 @@
+node_modules/
+.env
+dist/
+build/
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+.cache/
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
