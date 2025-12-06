@@ -18,11 +18,11 @@ test.describe("Usuário - /auth/registro", () => {
     expect(body).toHaveProperty("usuario.email", payload.email);
     expect(body).toHaveProperty("usuario.tipo", payload.tipo);
 
-    // senha deve estar hasheada (não pode voltar igual)
+   
     expect(body).toHaveProperty("usuario.senha");
     expect(body.usuario.senha).not.toBe(payload.senha);
 
-    // criadoEm (se sua API retornar no response)
+
     if (body.usuario.criadoEm) {
       expect(new Date(body.usuario.criadoEm).toString()).not.toBe("Invalid Date");
     }
@@ -36,7 +36,7 @@ test.describe("Usuário - /auth/registro", () => {
     expect(res1.status()).toBe(201);
 
     const res2 = await registerUser(api, payload);
-    expect([400, 409]).toContain(res2.status()); // depende do backend
+    expect([400, 409]).toContain(res2.status()); 
   });
 
   test("CT03 - deve falhar sem 'tipo' (obrigatório)", async () => {
